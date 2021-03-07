@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize');
+const ArtistModel = require('./artist');
 
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
 
-const setUpDatabase = () => {
+const setupDatabase = () => {
     const connection = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
         host: DB_HOST,
         port: DB_PORT,
@@ -10,8 +11,12 @@ const setUpDatabase = () => {
         logging: false
     });
 
-    connection.sync({ alter: true });
-  	return {  };
-}
+    const Artist = ArtistModel(connection, Sequelize);
 
-module.exports = setUpDatabase();
+    connection.sync({ alter: true });
+  	return {
+        Artist
+    };
+};
+
+module.exports = setupDatabase();
