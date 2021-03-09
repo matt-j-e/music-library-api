@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const { Artist } = require('../src/models');
 const app = require('../src/app');
+const { patch } = require('../src/app');
 
 describe('/artists', () => {
     before(done => {
@@ -87,7 +88,49 @@ describe('/artists', () => {
                         done();
                     }).catch(error => done(error));
             });
-        })
+        });
+
+        describe('PATCH /artists/:id', () => {
+            it('updates artist genre by id', (done) => {
+                const artist = artists[0];
+                request(app)
+                    .patch(`/artists/${artist.id}`)
+                    .send({  genre: 'Psychedelic Rock' })
+                    .then((res) => {
+                        expect(res.status).to.equal(200);
+                        Artist.findByPk(artist.id, { raw: true }).then((updatedArtist) => {
+                            expect(updatedArtist.genre).to.equal('Psychedelic Rock');
+                            expect(updatedArtist.name).to.equal('Tame Impala');
+                            done();
+                        }).catch(error => done(error));
+                    }).catch(error => done(error));
+            });
+
+            it('updates artist name by id', (done) => {
+                const artist = artists[1];
+                request(app)
+                    .patch(`/artists/${artist.id}`)
+                    .send({ name: 'Spice Girls' })
+                    .then((res) => {
+                        expect(res.status).to.equal(200)
+                        Artist.findByPk(artist.id, { raw: true }).then((updatedArtist) => {
+                            expect(updatedArtist.name).to.equal('Spice Girls');
+                            expect(updatedArtist.genre).to.equal('Pop');
+                            done();
+                        }).catch(error => done(error));
+                    }).catch(error => done(error));
+            });
+
+            it('returns a 404 if the artist does not exist', (done) => {
+                request(app)
+                    .patch('/artists/2')
+                    .then((res) => {
+                        expect(res.status).to.equal(404);
+                        expect(res.body.error).to.equal('The artist could not be found.');
+                        done();
+                    }).catch(error => done(error));
+            });
+        });
     });
 
 });

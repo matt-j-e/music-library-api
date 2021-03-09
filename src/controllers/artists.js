@@ -20,3 +20,11 @@ exports.getArtistById = (req, res) => {
             else res.status(200).json(artist);
         })
 };
+
+exports.update = (req, res) => {
+    Artist.update(req.body, { where: { id: req.params.artistId } })
+        .then(rows => {
+            if (rows[0] === 0) res.status(404).json({ error: "The artist could not be found." });
+            else res.status(200).json(rows);
+        });
+}
