@@ -28,3 +28,11 @@ exports.update = (req, res) => {
             else res.status(200).json(rows);
         });
 }
+
+exports.delete = (req, res) => {
+    Artist.destroy({ where: { id: req.params.artistId } })
+        .then(deletedRows => {
+            if (!deletedRows) res.status(404).json({ error: "The artist could not be found." });
+            else res.status(204).json(deletedRows);
+        })
+}

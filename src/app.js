@@ -18,4 +18,6 @@ app.post('/artists', artistControllers.create);
 
 app.patch('/artists/:artistId', artistControllers.update);
 
+app.delete('/artists/:artistId', artistControllers.delete);
+
 module.exports = app;
