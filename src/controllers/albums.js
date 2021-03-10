@@ -9,3 +9,23 @@ exports.createAlbum = (req, res) => {
         .then(album => res.status(201)
         .json(album));
 };
+
+exports.getAlbums = (req, res) => {
+    Album.findAll()
+        .then(albums => res.status(200)
+        .json(albums));
+};
+
+exports.getAlbumById = (req, res) => {
+    Album.findByPk(req.params.albumId)
+        .then(album => {
+            if (!album) res.status(404).json({ error: "The album could not be found." });
+            else res.status(200).json(album);
+        })
+};
+
+exports.getAlbumsByArtistId = (req, res) => {
+    Album.findAll({ where: { artistId: req.params.artistId } })
+        .then(albums => res.status(200)
+        .json(albums));
+};
