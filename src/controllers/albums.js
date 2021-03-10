@@ -25,6 +25,10 @@ exports.getAlbumById = (req, res) => {
 };
 
 exports.getAlbumsByArtistId = (req, res) => {
+    Artist.findByPk(req.params.artistId)
+        .then((artist) => {
+            if (!artist) res.status(404).json({ error: "The artist could not be found." });
+        });
     Album.findAll({ where: { artistId: req.params.artistId } })
         .then(albums => res.status(200)
         .json(albums));

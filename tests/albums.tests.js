@@ -83,6 +83,7 @@ describe('/albums', () => {
                 request(app)
                     .get('/albums')
                     .then((res) => {
+                        console.log(res.body);
                         expect(res.status).to.equal(200);
                         expect(res.body.length).to.equal(3);
                         res.body.forEach((album) => {
@@ -109,6 +110,16 @@ describe('/albums', () => {
                         done();
                     }).catch(error => done(error));
             });
+
+            it('returns a 404 if the album does not exist', (done) => {
+                request(app)
+                    .get('/albums/12345')
+                    .then((res) => {
+                        expect(res.status).to.equal(404);
+                        expect(res.body.error).to.equal('The album could not be found.');
+                        done();
+                    }).catch(error => done(error));
+            });
         });
 
         describe('GET /artists/:artistId/albums', () => {
@@ -116,12 +127,21 @@ describe('/albums', () => {
                 request(app)
                     .get(`/artists/${artist.id}/albums`)
                     .then((res) => {
-                        // console.log(res);
                         expect(res.status).to.equal(200);
                         expect(res.body.length).to.equal(3);
                         done();
                     }).catch(error => done(error));
             });
+
+            it('returns a 404 if the artist does not exist', (done) => {
+                request(app)
+                    .get('/artists/12345/albums')
+                    .then((res) => {
+                        expect(res.status).to.equal(404);
+                        expect(res.body.error).to.equal('The artist could not be found.');
+                        done();
+                    }).catch(error => done(error));
+            })
         });
     });
 });
