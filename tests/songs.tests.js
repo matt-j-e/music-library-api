@@ -50,6 +50,19 @@ describe('/songs', () => {
                     expect(res.body.name).to.equal('Solitude Is Bliss');
                     expect(res.body.artistId).to.equal(artist.id);
                     expect(res.body.albumId).to.equal(album.id);
+
+                    Song.findOne({
+                        where: { id: res.body.id },
+                        include: [
+                            { model: Artist, as: 'artist' },
+                            { model: Album, as: 'album' },
+                        ]
+                    }).then((song) => {
+                        expect(song.name).to.equal('Solitude Is Bliss');
+                        expect(song.artist.name).to.equal(artist.name);
+                        expect(song.album.name).to.equal(album.name);
+                    })
+
                     done();
                 }).catch(error => (error));
         });

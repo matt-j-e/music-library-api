@@ -28,5 +28,7 @@ app.patch('/albums/:albumId', albumControllers.update);
 app.delete('/albums/:albumId', albumControllers.delete);
 
 app.post('/albums/:albumId/song', songControllers.createSong);
+app.get('/songs', songControllers.getSongs);
+app.get('/songs/:songId', songControllers.getSongById);
 
 module.exports = app;
