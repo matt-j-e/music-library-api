@@ -3,6 +3,8 @@ const artistControllers = require('./controllers/artists');
 const artist = require('./models/artist');
 const albumControllers = require('./controllers/albums');
 const album = require('./models/album');
+const songControllers = require('./controllers/songs');
+const song = require('./models/song');
 
 const app = express();
 
@@ -24,5 +26,7 @@ app.get('/artists/:artistId/albums', albumControllers.getAlbumsByArtistId);
 app.post('/artists/:artistId/albums', albumControllers.createAlbum);
 app.patch('/albums/:albumId', albumControllers.update);
 app.delete('/albums/:albumId', albumControllers.delete);
+
+app.post('/albums/:albumId/song', songControllers.createSong);
 
 module.exports = app;

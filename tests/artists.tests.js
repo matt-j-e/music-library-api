@@ -26,6 +26,8 @@ describe('/artists', () => {
             }).then(response => {
                 expect(response.status).to.equal(201);
                 expect(response.body.name).to.equal('Tame Impala');
+                expect(response.body.genre).to.equal('Rock');
+
                 Artist.findByPk(response.body.id, { raw: true }).then(insertedArtistRecord => {
                     expect(insertedArtistRecord.name).to.equal('Tame Impala');
                     expect(insertedArtistRecord.genre).to.equal('Rock');

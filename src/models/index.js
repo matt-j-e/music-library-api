@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const ArtistModel = require('./artist');
 const AlbumModel = require('./album');
+const SongModel = require('./song');
 
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
 
@@ -14,13 +15,18 @@ const setupDatabase = () => {
 
     const Artist = ArtistModel(connection, Sequelize);
     const Album = AlbumModel(connection, Sequelize);
+    const Song = SongModel(connection, Sequelize);
 
     Album.belongsTo(Artist, { as: 'artist' });
+    // NB. { as: 'artist' } is needed tp prevent a 'Duplicate column name DatabaseError
+    Song.belongsTo(Artist, { as: 'artist' });
+    Song.belongsTo(Album, { as: 'album' });
 
     connection.sync({ alter: true });
   	return {
         Artist,
-        Album
+        Album,
+        Song
     };
 };
 
