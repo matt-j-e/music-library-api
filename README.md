@@ -36,7 +36,9 @@ albumId - foreign key
 
 ## API end points
 **ADD ARTIST** `POST /artists` Body: "name" <string>, "genre" <string>
+
 **ADD ALBUM** `POST /artists/:artistId/albums`  Body: "name" <string>, "year" <integer>
+
 **ADD SONG** `POST /albums/:albumId/song Body: "name" <string>
 
  
