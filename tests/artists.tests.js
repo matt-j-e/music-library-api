@@ -2,7 +2,6 @@ const { expect } = require('chai');
 const request = require('supertest');
 const { Artist } = require('../src/models');
 const app = require('../src/app');
-const { patch } = require('../src/app');
 
 describe('/artists', () => {
     before(done => {

@@ -42,7 +42,7 @@ describe('/songs', () => {
             request(app)
                 .post(`/albums/${album.id}/song`)
                 .send({
-                    artistId: artist.id,
+                    // artistId: artist.id,
                     name: 'Solitude Is Bliss'
                 })
                 .then((res) => {
