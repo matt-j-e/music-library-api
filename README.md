@@ -38,17 +38,21 @@ albumId - foreign key
 
 ACTION | URI | BODY CONTENT
 -------|-----|-------------
-ADD ARTIST | `POST /artists` | "name" [string], "genre" [string]
-ADD ALBUM | `POST /artists/:artistId/albums` | "name" [string], "year" [integer]
-ADD SONG | `POST /albums/:albumId/song` | "name" [string]
-GET ALL ARTISTS | `GET /artists` | n/a
-GET ARTIST BY ID | `GET /artists/:artistId` | n/a
-GET ALL ALBUMS | `GET /albums` | n/a
-GET AN ALBUM BY ID | `GET /albums/:albumId` | n/a
-GET ALBUMS BY ARTIST ID | `GET /artists/:artistId/albums` | n/a
-GET ALL SONGS | `GET /songs` | n/a
-GET A SONG BY ID | `GET /songs/:songId` | n/a
-GET ALL SONGS BY ARTIST ID | `GET /artists/:artistId/songs` | n/a
+Add ARTIST | `POST /artists` | name [string], genre [string]
+Edit ARTIST | `PATCH /artists/:artistId` | name [string] and/or genre [string]
+Delete ARTIST | `DELETE /artists/:artistId` | n/a
+Get all ARTISTS | `GET /artists` | n/a
+Get a single ARTIST | `GET /artists/:artistId` | n/a
+Add ALBUM | `POST /artists/:artistId/albums` | name [string], year [integer]
+Edit ALBUM | `PATCH /albums/:albumId` | name [string] and/or year [integer]
+Delete ALBUM | `DELETE /albums/:albumId` | n/a
+Get all ALBUMS | `GET /albums` | n/a
+Get a single ALBUM | `GET /albums/:albumId` | n/a
+Get all ALBUMS by an artist | `GET /artists/:artistId/albums` | n/a
+Add SONG | `POST /albums/:albumId/song` | "name" [string]
+Get all SONGS | `GET /songs` | n/a
+Get a single SONG | `GET /songs/:songId` | n/a
+Get all SONGS by an artist | `GET /artists/:artistId/songs` | n/a
 
 ## Status
 
