@@ -20,27 +20,38 @@ A Manchester Codes project to set up a music library API using an ExpressJS app 
 We used a local MySQL database inside a Docker container.
 The database has the following structure:
 
-**Artist table**
-name - string
+**Artist table** <br>
+name - string, 
 genre - string
 
-**Album table**
-name - string
-year - integer
+**Album table** <br>
+name - string, 
+year - integer, 
 artistId - foreign key
 
-**Song table**
-name - string
-artistId - foreign key
+**Song table** <br>
+name - string, 
+artistId - foreign key, 
 albumId - foreign key
 
 ## API end points
-**ADD ARTIST** `POST /artists` Body: "name" <string>, "genre" <string>
 
-**ADD ALBUM** `POST /artists/:artistId/albums`  Body: "name" <string>, "year" <integer>
+ACTION | URI | BODY CONTENT
+-------|-----|-------------
+ADD ARTIST | `POST /artists` | "name" [string], "genre" [string]
+ADD ALBUM | `POST /artists/:artistId/albums` | "name" [string], "year" [integer]
+ADD SONG | `POST /albums/:albumId/song` | "name" [string]
+GET ALL ARTISTS | `GET /artists` | n/a
+GET ARTIST BY ID | `GET /artists/:artistId` | n/a
+GET ALL ALBUMS | `GET /albums` | n/a
+GET AN ALBUM BY ID | `GET /albums/:albumId` | n/a
+GET ALBUMS BY ARTIST ID | `GET /artists/:artistId/albums` | n/a
+GET ALL SONGS | `GET /songs` | n/a
+GET A SONG BY ID | `GET /songs/:songId` | n/a
+GET ALL SONGS BY ARTIST ID | `GET /artists/:artistId/songs` | n/a
 
-**ADD SONG** `POST /albums/:albumId/song Body: "name" <string>
+## Status
 
- 
+This project is complete
 
 
