@@ -49,7 +49,7 @@ Delete ALBUM | `DELETE /albums/:albumId` | n/a
 Get all ALBUMS | `GET /albums` | n/a
 Get a single ALBUM | `GET /albums/:albumId` | n/a
 Get all ALBUMS by an artist | `GET /artists/:artistId/albums` | n/a
-Add SONG | `POST /albums/:albumId/song` | "name" [string]
+Add SONG | `POST /albums/:albumId/song` | name [string]
 Get all SONGS | `GET /songs` | n/a
 Get a single SONG | `GET /songs/:songId` | n/a
 Get all SONGS by an artist | `GET /artists/:artistId/songs` | n/a
